@@ -43,7 +43,7 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="JWTTokenGeneration" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="JWTTokenGeneration" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -466,14 +466,14 @@ file.close();</stringProp>
         </CSVDataSet>
         <hashTree/>
       </hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="false">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">10</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -889,7 +889,7 @@ file.close();</stringProp>
         </CookieManager>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="NHPRI_Formulary Drug_S1" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="NHPRI_FORMULARY_DRUG_S13_UC5" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -901,10 +901,10 @@ file.close();</stringProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-        <stringProp name="TestPlan.comments">NHPRI_Formulary Drug_S1</stringProp>
+        <stringProp name="TestPlan.comments">NHPRI_FORMULARY_DRUG_S13_UC5</stringProp>
       </ThreadGroup>
       <hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="NHPRI_Formulary Drug_S1" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="NHPRI_FORMULARY_DRUG_S13_UC5" enabled="true"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FormularyDrug" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -983,6 +983,30 @@ file.close();</stringProp>
               <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
             </JSONPostProcessor>
             <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="resourcsID" enabled="false">
+              <stringProp name="JSONPostProcessor.referenceNames">resourcsID</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">entry[*].resource.id</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="MedicaID" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">MedicaID</stringProp>
+              <stringProp name="RegexExtractor.regex">&quot;code&quot;: &quot;MEDCD(.*?)&quot;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">0</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="EFPID" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">EFPID</stringProp>
+              <stringProp name="RegexExtractor.regex">&quot;code&quot;: &quot;EFP(.*?)&quot;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">0</stringProp>
+            </RegexExtractor>
+            <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FormularyDrugMedicaidPlanSearch" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -992,7 +1016,7 @@ file.close();</stringProp>
             <stringProp name="HTTPSampler.port">${PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${PATH}/MedicationKnowledge/MEDCD259696</stringProp>
+            <stringProp name="HTTPSampler.path">${PATH}/MedicationKnowledge/MEDCD${MedicaID}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
@@ -1022,7 +1046,7 @@ file.close();</stringProp>
             <stringProp name="HTTPSampler.port">${PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${PATH}/MedicationKnowledge/EFP4854</stringProp>
+            <stringProp name="HTTPSampler.path">${PATH}/MedicationKnowledge/EFP${EFPID}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
@@ -1366,23 +1390,23 @@ file.close();</stringProp>
         <stringProp name="Unit">M</stringProp>
       </com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup>
       <hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="NHPRI_Formulary Drug_S1" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="NHPRI_FORMULARY_DRUG_S13_UC5" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
           <FloatProperty>
             <name>ThroughputController.percentThroughput</name>
-            <value>20.0</value>
+            <value>100.0</value>
             <savedValue>0.0</savedValue>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="NHPRI_Formulary Drug_S1_ModuleController" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="NHPRI_FORMULARY_DRUG_S13_UC5" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="2084537013">NHPRI_UC5</stringProp>
-              <stringProp name="-1863677224">NHPRI_Formulary Drug_S1</stringProp>
-              <stringProp name="-1863677224">NHPRI_Formulary Drug_S1</stringProp>
+              <stringProp name="-669389022">NHPRI_FORMULARY_DRUG_S13_UC5</stringProp>
+              <stringProp name="-669389022">NHPRI_FORMULARY_DRUG_S13_UC5</stringProp>
             </collectionProp>
           </ModuleController>
           <hashTree/>
@@ -1408,7 +1432,7 @@ file.close();</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
       </ThreadGroup>
       <hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="NHPRI_Formulary Drug_S1" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="NHPRI_FORMULARY_DRUG_S13_UC5" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1419,12 +1443,12 @@ file.close();</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="NHPRI_Formulary Drug_S1_ModuleController" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="NHPRI_FORMULARY_DRUG_S13_UC5" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="2084537013">NHPRI_UC5</stringProp>
-              <stringProp name="-1863677224">NHPRI_Formulary Drug_S1</stringProp>
-              <stringProp name="-1863677224">NHPRI_Formulary Drug_S1</stringProp>
+              <stringProp name="-669389022">NHPRI_FORMULARY_DRUG_S13_UC5</stringProp>
+              <stringProp name="-669389022">NHPRI_FORMULARY_DRUG_S13_UC5</stringProp>
             </collectionProp>
           </ModuleController>
           <hashTree/>
